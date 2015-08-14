@@ -27,7 +27,7 @@ namespace YouTrackAPI.Controllers
         [EnableCors(origins: "http://localhost:3000", headers: "*", methods: "*")]
         public IHttpActionResult Post([FromBody] Credentials credentials)
         {
-            var cookies = _loginService.LoginAsync(credentials);//.Result;
+            var cookies = _loginService.LoginAsync(credentials);
             if (cookies == null)
             {
                 return StatusCode(HttpStatusCode.NoContent);
