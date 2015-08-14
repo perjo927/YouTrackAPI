@@ -1,4 +1,7 @@
-﻿using System.Web.Http;
+﻿using System.Net;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Cors;
 using YouTrackAPI.Models;
 using YouTrackAPI.Services;
 
@@ -16,10 +19,20 @@ namespace YouTrackAPI.Controllers
             _loginService = loginService;
         }
 
-        public string Post([FromBody] Credentials credentials)
+        /// <summary>
+        /// Accepts x-www-form-urlencoded string corresponding to the Credentials model
+        /// </summary>
+        /// <param name="credentials"></param>
+        /// <returns></returns>
+        [EnableCors(origins: "http://localhost:3000", headers: "*", methods: "*")]
+        public IHttpActionResult Post([FromBody] Credentials credentials)
         {
-            var token = _loginService.Login(credentials);
-            return $"Login {credentials.Login}, Password: {credentials.Password}"; // token;
+            var cookies = _loginService.LoginAsync(credentials);//.Result;
+            if (cookies == null)
+            {
+                return StatusCode(HttpStatusCode.NoContent);
+            }
+            return Ok(cookies);
         }
     }
 }

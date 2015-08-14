@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using YouTrackAPI.Models;
 
 namespace YouTrackAPI.Services
 {
     public interface ILoginService
     {
-        Task<string> Login(Credentials credentials);
+        Task<IEnumerable<string>> LoginAsync(Credentials credentials);
     }
 }
