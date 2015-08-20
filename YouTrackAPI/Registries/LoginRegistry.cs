@@ -14,8 +14,8 @@ namespace YouTrackAPI.Registries
                     scan.TheCallingAssembly();
                     scan.WithDefaultConventions();
                 });
-            //For<IExample>().Use<Example>();
             For<ILoginService>().Use<LoginService>();
+            For<IIssueService>().Use<IssueService>();
         }
     }
 }

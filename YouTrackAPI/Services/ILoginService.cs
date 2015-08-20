@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using RestSharp;
 using YouTrackAPI.Models;
 
 namespace YouTrackAPI.Services
 {
     public interface ILoginService
     {
-        Task<IEnumerable<string>> LoginAsync(Credentials credentials);
+        IList<RestResponseCookie> Login(Credentials credentials);
     }
 }
